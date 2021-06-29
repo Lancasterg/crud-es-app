@@ -1,0 +1,23 @@
+{
+  "6cafe024c7e9f79dcb654fdc34b2577a": {
+    "location_on_disk": "/tmp/www/data/example.txt"
+  },
+  "cb404b5abaff0e2c302790c3d698d53a": {
+    "location_on_disk": "/tmp/www/data/downloads/test.txt"
+  },
+  "dc186f2d44cf7389606ed1da176aa854": {
+    "location_on_disk": "/tmp/www/data/huge_file.mp4"
+  },
+  "jfweuf947398fu8wuf98weuf89uw8efu": {
+    "location_on_disk": "/tmp/myfile.txt"
+  },
+  "jweufjw9e8f98weuf8uwe8f9uwe8fu89": {
+    "location_on_disk": "/tmp/a_false_file.txt"
+  },
+  "vkcv09ifd8v98ve98rvu98eruv98u9r8": {
+    "location_on_disk": "/tmp/a_false_file_1.txt"
+  },
+  "test": {
+    "location_on_disk": "/tmp/test.txt"
+  }
+}

@@ -1,0 +1,3 @@
+include VERSION
+recursive-include src *.json *.sh
+recursive-include test *.json *.sh *.feature *.txt
