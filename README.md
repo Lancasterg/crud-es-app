@@ -11,7 +11,7 @@ Containerised and deployed using docker-compose.
 * docker-compose
 
 ## How to run
-
+ 
 ```bash
 # Create a virtual environment, activate and install requirements
 $ python -m virtualenv crud-es-venv
