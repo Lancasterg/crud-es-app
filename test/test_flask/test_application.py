@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from unittest import TestCase
 
-from src.application.application import Application
+from src.application.application import Application, ENV_TEST
 
 
 class TestApplication(TestCase):
@@ -10,7 +10,7 @@ class TestApplication(TestCase):
     def setUp(self):
         app = Flask(__name__)
         api = Api(app)
-        api.add_resource(Application, '/', resource_class_kwargs={'env': 'test'})
+        api.add_resource(Application, '/', resource_class_kwargs={'env': ENV_TEST})
         self.client = app.test_client()
 
     def test_ping(self):

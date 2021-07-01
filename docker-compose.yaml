@@ -7,13 +7,18 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+
   web:
     container_name: "crud-fs-es-app"
     build: .
     volumes:
       - .:/usr/src/app/
+      - /var/www/:/var/www/
     ports:
       - "5000:5000"
     depends_on:
       - "elastic"
+    links:
+      - "elastic"
+
 

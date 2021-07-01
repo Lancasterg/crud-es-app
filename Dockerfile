@@ -10,14 +10,10 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 RUN python3 setup.py install
-
-
+RUN mkdir -p /var/www/
 
 EXPOSE 5000
 WORKDIR /app/src/run
 ENV FLASK_APP=app.py
 
-
-#ENTRYPOINT ["python3"]
-#CMD [ "src/run/application.py" ]
-CMD ["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "src.run.app:app"]

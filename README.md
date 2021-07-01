@@ -24,7 +24,7 @@ $ pip install -r requirements-dev.txt
 ### Quick start
 ```bash
 # Run the application! 
-$ docker-compose up
+$ docker-compose up --build
 ```
 
 ### For development
@@ -32,7 +32,6 @@ $ docker-compose up
 # Install the package in development mode
 $ pip install 
 ```
-
 
 ### For testing
 ```bash

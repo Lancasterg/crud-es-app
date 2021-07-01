@@ -13,6 +13,7 @@ ARG_FILE_NAME = 'file_name'
 ARG_FILE_LOCATION = ElasticInterface.DISK_LOCATION
 ARG_DELETED_FILE_ID = 'deleted_file_id'
 
+ENV = 'env'
 ENV_DEV = 'dev'
 ENV_TEST = 'test'
 ENV_PROD = 'prod'
@@ -20,10 +21,12 @@ ENV_PROD = 'prod'
 
 class Application(Resource):
 
-    def __init__(self, env=ENV_DEV):
+    def __init__(self, env=ENV_PROD):
         super().__init__()
 
-        if env in [ENV_DEV, ENV_PROD]:
+        if env == ENV_DEV:
+            self.es = ElasticInterface(host="0.0.0.0")
+        elif env == ENV_PROD:
             self.es = ElasticInterface()
         else:
             # For unit testing purposes, we don't spin up an ES cluster
@@ -53,7 +56,7 @@ class Application(Resource):
         file_path = self.es.search_filename_by_id(file_id)
 
         if file_path is None:
-            return '', 404
+            return 404
 
         if exists(file_path):
             return send_file(file_path)
@@ -65,8 +68,12 @@ class Application(Resource):
         parser.add_argument(ARG_FILE_ID, type=str, help='The ID for the file stored in ElasticSearch')
         args = parser.parse_args()
         file_id = args[ARG_FILE_ID]
-        file_name = self.es.delete_file_by_id(file_id)
-        self.io.delete_file(file_name)
+        try:
+            file_name = self.es.delete_file_by_id(file_id)
+            self.io.delete_file(file_name)
+        except FileNotFoundError:
+            return f'File with id {file_id} not found', 404
+
         return {
             ARG_DELETED_FILE_ID: file_id,
             ARG_FILE_NAME: file_name
