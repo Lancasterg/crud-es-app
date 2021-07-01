@@ -37,8 +37,6 @@ class Application(Resource):
     def get(self):
         """
         Return a file to the client, given a document ID
-
-        done?
         """
         parser = reqparse.RequestParser()
         parser.add_argument(ARG_FILE_ID, type=str, help='The ID for the file stored in ElasticSearch')

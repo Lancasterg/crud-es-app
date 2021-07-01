@@ -7,6 +7,6 @@ Feature: get
      Then We receive a 404 status code
 
   Scenario: File does exist
-    Given The file is found in ElasticSearch
+    Given The ES server and REST API are online
      When We send a get request
      Then We receive the file and a 200 status code
