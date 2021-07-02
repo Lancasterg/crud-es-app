@@ -46,7 +46,7 @@ class ElasticInterface(AbstractElasticInterface):
         """
         Given a file id, delete the id from ElasticSearch
         :param file_id: The file id to delete
-        :return:
+        :return: The name of the deleted file
         """
         file_name = self.search_filename_by_id(file_id)
         if file_name is None:

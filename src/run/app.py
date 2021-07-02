@@ -5,6 +5,11 @@ from src.application.application import Application, ENV, ENV_PROD, ENV_DEV
 
 
 def build_app(env=ENV_PROD):
+    """
+    Build the application
+    :param env: The environment in which the app will be run
+    :return: Flask app
+    """
     app = Flask(__name__)
     app.config['UPLOADS_FOLDER'] = '/tmp/www/'
     app.config['TESTING'] = False if env in [ENV_DEV, ENV_PROD] else True

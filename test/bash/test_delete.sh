@@ -1,3 +1,3 @@
 #!/bin/bash
 
-curl -v -X DELETE -d "file_id=d051ca3ad28f4939ad63f84e4cc97744" http://localhost:5000
+curl -v -X DELETE -d "file_id=9cd6013fb76843b1b625153c6b77f89a" http://localhost:5000

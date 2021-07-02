@@ -1,10 +1,14 @@
 from os import remove
 from os.path import join, exists
 from uuid import uuid4
+from src.utils.log import get_default_logger
 
 
 class InputOutputInterface:
     SERVER_LOCATION = '/var/www'
+
+    def __init__(self):
+        self._log = get_default_logger(self)
 
     def delete_file(self, file_name: str) -> None:
         """
@@ -15,7 +19,7 @@ class InputOutputInterface:
         file_name = self.make_server_location(file_name)
         if exists(file_name):
             remove(file_name)
-            print(f'{file_name} removed from file system')
+            self._log.info(f'{file_name} removed from file system')
         else:
             raise FileNotFoundError('File not found on filesystem')
 

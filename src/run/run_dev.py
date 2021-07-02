@@ -1,5 +1,9 @@
 from src.run.app import *
 
+"""
+Run the server in development mode
+"""
+
 
 def main():
     app = build_app(env=ENV_DEV)

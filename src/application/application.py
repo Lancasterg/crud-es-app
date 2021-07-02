@@ -6,11 +6,11 @@ from os.path import exists
 
 from src.utils.es_interface import ElasticInterface, MockElasticInterface
 from src.utils.io_interface import InputOutputInterface
+from src.utils.log import get_default_logger
 
 ARG_FILE_ID = 'file_id'
 ARG_FILE = 'file'
 ARG_FILE_NAME = 'file_name'
-ARG_FILE_LOCATION = ElasticInterface.DISK_LOCATION
 ARG_DELETED_FILE_ID = 'deleted_file_id'
 
 ENV = 'env'
@@ -23,6 +23,7 @@ class Application(Resource):
 
     def __init__(self, env=ENV_PROD):
         super().__init__()
+        self._log = get_default_logger(self)
 
         if env == ENV_DEV:
             self.es = ElasticInterface(host="0.0.0.0")
@@ -62,6 +63,7 @@ class Application(Resource):
             return '', 404
 
     def delete(self):
+        """ Delete a file from the server"""
         parser = reqparse.RequestParser()
         parser.add_argument(ARG_FILE_ID, type=str, help='The ID for the file stored in ElasticSearch')
         args = parser.parse_args()
@@ -87,7 +89,7 @@ class Application(Resource):
 
         file_id = self.es.search_id_by_filename(input_file.filename)
         if file_id is not None:
-            print(f'{input_file.filename} exists. Updating {file_id}')
+            self._log.info(f'{input_file.filename} exists. Updating {file_id}')
 
         file_id = self.es.add_document_details(input_file.filename, file_id=file_id)
         self.io.save_file(input_file)
